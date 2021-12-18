@@ -1,136 +1,68 @@
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  List, ListItem, ListItemText, TextField,
-  Box,
-  ListItemSecondaryAction,
-  IconButton,
-  ListItemAvatar,
+  Button,
   Theme,
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { useMemo, useState } from 'react';
-import { Delete as DeleteIcon, Edit as EditIcon } from '@mui/icons-material';
-import clsx from 'clsx';
-import { mongoObjectId } from '../../utils/generator';
-import { Task, TaskStatus } from '../../interfaces';
-import TaskDetail from './TaskDetail';
+import {
+  memo, useCallback, useEffect, useMemo, useRef, useState,
+} from 'react';
+import { useParams } from 'react-router-dom';
+
+import Children from './Children';
 
 const HomePage = () => {
   const classes = useStyles();
-  const [taskTitle, setTaskTitle] = useState('');
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [currentTaskId, setCurrentTaskId] = useState<string>('');
+  const params = useParams();
+  const [value, setValue] = useState(1);
+  const [count, setCount] = useState(1);
+  const ref = useRef<any | null>(null);
 
-  const currentTask = useMemo(() => tasks.find((task) => task._id === currentTaskId), [currentTaskId, tasks]);
+  // redefinir
+  // const valueDouble = useMemo(() => value * 2, [value]);
+  const valueDouble = 22222;
 
-  const _handleChange = ({ target: { value } }: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    setTaskTitle(value);
+  const _handleClickCount = useCallback(() => {
+    console.log('_handleClickCount');
+    setCount((count) => count * 2);
+  }, []);
+
+  const _handleClickRef = () => {
+    console.log('ref.current', ref.current);
+    ref.current.click();
   };
 
-  const _handleSubmitCreateNewTask = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  useEffect(() => {
+    console.log('mount');
+  }, []);
 
-    setTasks((prev) => [...prev, {
-      _id: mongoObjectId(),
-      title: taskTitle,
-      description: '',
-      status: TaskStatus.Pending,
-    }]);
+  useEffect(() => {
+    console.log('value', value);
+  }, [value]);
 
-    setTaskTitle('');
-  };
+  console.log('Hijo ya saliste?');
+  console.log('ref.current', ref.current);
 
-  const _handleClickDeleteTask = (taskId: string) => () => {
-    setTasks((prev) => prev.filter((task) => task._id !== taskId));
-  };
-
-  const _handleClickEditTask = (taskId: string) => () => {
-    setCurrentTaskId(taskId);
-  };
-
-  const _handleChangeTask = (newTask: Task) => {
-    setTasks((prev) => prev.map((task) => {
-      if (task._id === newTask._id) {
-        return {
-          ...task,
-          ...newTask,
-        };
-      }
-      return task;
-    }));
-    setCurrentTaskId('');
-  };
-
-  const _handleCancelEdit = () => {
-    setCurrentTaskId('');
-  };
+  console.log('params', params);
 
   return (
-    <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
-      <Card sx={{
-        width: 800,
-        height: 600,
-      }}
-      >
-        <CardHeader title="Todo List" />
-        <CardContent>
-          {currentTask ? (
-            <TaskDetail
-              task={currentTask}
-              onChange={_handleChangeTask}
-              onCancel={_handleCancelEdit}
-            />
-          ) : (
-            <form onSubmit={_handleSubmitCreateNewTask}>
-              <TextField fullWidth size="small" value={taskTitle} onChange={_handleChange} />
-            </form>
-          )}
-          <List sx={{ mt: 2.5 }}>
-            {tasks.map((task) => (
-              <ListItem key={task._id}>
-                <ListItemAvatar sx={{
-                  minWidth: 28,
-                }}
-                >
-                  <div className={clsx(classes.dot, classes[task.status])} />
-                </ListItemAvatar>
-                <ListItemText primary={task.title} secondary={task.description} />
-                {!currentTaskId && (
-                  <ListItemSecondaryAction>
-                    <IconButton onClick={_handleClickEditTask(task._id)}>
-                      <EditIcon />
-                    </IconButton>
-                    <IconButton onClick={_handleClickDeleteTask(task._id)}>
-                      <DeleteIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                )}
-              </ListItem>
-            ))}
-          </List>
-        </CardContent>
-      </Card>
-    </Box>
+    <div className={classes.root}>
+      <div>{value}</div>
+      <div>{count}</div>
+      <div>{JSON.stringify(valueDouble, null, 2)}</div>
+      <Button onClick={_handleClickCount}>Click</Button>
+      <Button onClick={_handleClickRef}>Click ref</Button>
+      <Children onClick={_handleClickCount} valueDouble={valueDouble} ref={ref} />
+    </div>
   );
 };
 
-const useStyles = makeStyles<Theme>((theme) => ({
-  dot: {
-    width: 18,
-    height: 18,
-    borderRadius: '50%',
-  },
-  pending: {
-    backgroundColor: theme.palette.grey[300],
-  },
-  doing: {
-    backgroundColor: theme.palette.grey[300],
-  },
-  finished: {
-    backgroundColor: theme.palette.grey[300],
+const useStyles = makeStyles<Theme>((/* theme */) => ({
+  root: {
+
   },
 }), { name: 'HomePage' });
 
 export default HomePage;
+
+// tiempo
+// memoria

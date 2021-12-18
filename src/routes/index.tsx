@@ -8,7 +8,10 @@ import HomePage from '../pages/_home';
 const Root = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="/home" element={<HomePage />} />
+      <Route
+        path="/home/:homeId/:otroId"
+        element={<HomePage />}
+      />
     </Routes>
   </BrowserRouter>
 );
