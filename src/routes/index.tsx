@@ -9,7 +9,7 @@ const Root = () => (
   <BrowserRouter>
     <Routes>
       <Route
-        path="/home/:homeId/:otroId"
+        path="/home"
         element={<HomePage />}
       />
     </Routes>

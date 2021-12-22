@@ -1,57 +1,122 @@
 import {
   Button,
+  // TextField,
   Theme,
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+// import produce from 'immer';
 import {
-  memo, useCallback, useEffect, useMemo, useRef, useState,
-} from 'react';
-import { useParams } from 'react-router-dom';
+  useQuery,
+  gql,
+  // useApolloClient,
+  useMutation,
+} from '@apollo/client';
+import { useMemo } from 'react';
+// import { useSnackbar } from 'notistack';
+import VodDetail from './VodDetail';
+// import { mongoObjectId } from '../../utils/generator';
 
-import Children from './Children';
+const GET_VODS = gql`
+  query GetVods {
+    getVods {
+      _id
+      title
+      questions {
+        _id
+        statement
+        urlSourceAnswer
+        updatedAt
+        createdAt
+      }
+      updatedAt
+      createdAt
+    }
+  }
+`;
+
+const CREATE_VOD = gql`
+  mutation createVod($input: CreateVodInput!) {
+    createVod(input: $input) {
+      _id
+      title
+      questions {
+        _id
+        statement
+        urlSourceAnswer
+      }
+    }
+  }
+`;
+
+interface Vod {
+  _id: string;
+  title: string;
+  questions: {
+    _id: string;
+    staeement: string;
+  }[];
+  __typename: string;
+}
 
 const HomePage = () => {
   const classes = useStyles();
-  const params = useParams();
-  const [value, setValue] = useState(1);
-  const [count, setCount] = useState(1);
-  const ref = useRef<any | null>(null);
+  // const client = useApolloClient();
+  // const snackbarController = useSnackbar();
 
-  // redefinir
-  // const valueDouble = useMemo(() => value * 2, [value]);
-  const valueDouble = 22222;
+  const getVodsQuery = useQuery(GET_VODS);
+  const [createVod, createVodResult] = useMutation(CREATE_VOD);
 
-  const _handleClickCount = useCallback(() => {
-    console.log('_handleClickCount');
-    setCount((count) => count * 2);
-  }, []);
+  const vods: Vod[] = useMemo(() => getVodsQuery.data?.getVods ?? [], [getVodsQuery.data]);
 
-  const _handleClickRef = () => {
-    console.log('ref.current', ref.current);
-    ref.current.click();
+  const _handleClickAdNewVod = () => {
+    const newVod = {
+      title: 'New Vod',
+      questions: [],
+    };
+
+    createVod({
+      variables: {
+        input: newVod,
+      },
+      refetchQueries: [{
+        query: GET_VODS,
+        variables: {},
+      }],
+      // update: (cache, { data: { createVod: newVodDb } }) => {
+      //   try {
+      //     const params = {
+      //       query: GET_VODS,
+      //       variables: {},
+      //     };
+      //     cache.writeQuery({
+      //       ...params,
+      //       data: produce(client.readQuery(params), (draft: any) => {
+      //         draft.getVods.push(newVodDb);
+      //       }),
+      //     });
+      //   } catch (error: any) {
+      //     snackbarController.enqueueSnackbar(error.message ?? 'Ocurrio algun error');
+      //   }
+      // },
+    });
   };
 
-  useEffect(() => {
-    console.log('mount');
-  }, []);
-
-  useEffect(() => {
-    console.log('value', value);
-  }, [value]);
-
-  console.log('Hijo ya saliste?');
-  console.log('ref.current', ref.current);
-
-  console.log('params', params);
+  if (getVodsQuery.loading) {
+    return (
+      <div>
+        Loading ...
+      </div>
+    );
+  }
 
   return (
     <div className={classes.root}>
-      <div>{value}</div>
-      <div>{count}</div>
-      <div>{JSON.stringify(valueDouble, null, 2)}</div>
-      <Button onClick={_handleClickCount}>Click</Button>
-      <Button onClick={_handleClickRef}>Click ref</Button>
-      <Children onClick={_handleClickCount} valueDouble={valueDouble} ref={ref} />
+      {vods.map((vod) => (
+        <VodDetail key={vod._id} {...vod} />
+      ))}
+      <Button onClick={_handleClickAdNewVod} disabled={createVodResult.loading}>
+        Agregar vod a nivel de cache ( no existe en la base de datos)
+      </Button>
     </div>
   );
 };
