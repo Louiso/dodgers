@@ -7,46 +7,14 @@ import { makeStyles } from '@mui/styles';
 // import produce from 'immer';
 import {
   useQuery,
-  gql,
   // useApolloClient,
   useMutation,
 } from '@apollo/client';
 import { useMemo } from 'react';
 // import { useSnackbar } from 'notistack';
 import VodDetail from './VodDetail';
+import { CREATE_VOD, GET_VODS } from './apollo/hooks';
 // import { mongoObjectId } from '../../utils/generator';
-
-const GET_VODS = gql`
-  query GetVods {
-    getVods {
-      _id
-      title
-      questions {
-        _id
-        statement
-        urlSourceAnswer
-        updatedAt
-        createdAt
-      }
-      updatedAt
-      createdAt
-    }
-  }
-`;
-
-const CREATE_VOD = gql`
-  mutation createVod($input: CreateVodInput!) {
-    createVod(input: $input) {
-      _id
-      title
-      questions {
-        _id
-        statement
-        urlSourceAnswer
-      }
-    }
-  }
-`;
 
 interface Vod {
   _id: string;

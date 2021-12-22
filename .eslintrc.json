@@ -61,5 +61,15 @@
 		"jsx-a11y/no-static-element-interactions": "off",
 		"react/jsx-props-no-spreading": "off",
 		"no-param-reassign": "off"
-	}
+	},
+	"overrides": [
+    {
+      "files": ["*.graphql"],
+      "parser": "@graphql-eslint/eslint-plugin",
+      "plugins": ["@graphql-eslint"],
+      "rules": {
+        "@graphql-eslint/known-type-names": "error"
+      }
+    }
+  ]
 }

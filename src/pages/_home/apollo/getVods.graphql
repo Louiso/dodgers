@@ -1,0 +1,15 @@
+query GetVods {
+  getVods {
+    _id
+    title
+    questions {
+      _id
+      statement
+      urlSourceAnswer
+      updatedAt
+      createdAt
+    }
+    updatedAt
+    createdAt
+  }
+}

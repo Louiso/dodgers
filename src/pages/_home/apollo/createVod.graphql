@@ -1,0 +1,11 @@
+mutation createVod($input: CreateVodInput!) {
+  createVod(input: $input) {
+    _id
+    title
+    questions {
+      _id
+      statement
+      urlSourceAnswer
+    }
+  }
+}
