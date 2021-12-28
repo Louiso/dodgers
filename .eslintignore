@@ -1,2 +1,4 @@
 *.css
 *.svg
+vite.config.ts
+node_modules

@@ -23,7 +23,26 @@
 	],
 	"settings": {
 		"import/resolver": {
-			"typescript": {}
+			"typescript": {},
+			"alias": {
+        "map": [
+					[ "@utils", "./src/utils" ],
+					[ "@utils/*", "./src/utils/*" ],
+					[ "@components", "./src/components" ],
+					[ "@components/*", "./src/components/*" ],
+					[ "@containers", "./src/containers" ],
+					[ "@containers/*", "./src/containers/*" ],
+					[ "@hooks", "./src/hooks" ],
+					[ "@hooks/*", "./src/hooks/*" ],
+					[ "@layouts", "./src/layouts" ],
+					[ "@layouts/*", "./src/layouts/*" ],
+					[ "@theme", "./src/theme" ],
+					[ "@theme/*", "./src/theme/*" ],
+					[ "@slices", "./src/slices" ],
+					[ "@slices/*", "./src/slices/*" ],
+        ],
+        "extensions": [".ts", ".js", ".jsx", ".json"]
+      }
 		}
 	},
 	"rules": {

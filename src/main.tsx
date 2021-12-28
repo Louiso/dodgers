@@ -2,18 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { ApolloProvider } from '@apollo/client';
 import { SnackbarProvider } from 'notistack';
+import { Provider } from 'react-redux';
+import { store } from './store';
 import Root from './routes';
-import client from './apollo/client';
+// import { ApolloProvider } from '@apollo/client';
+// import client from './apollo/client';
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={createTheme()}>
       <SnackbarProvider maxSnack={3}>
-        <ApolloProvider client={client}>
+        {/* <ApolloProvider client={client}> */}
+        <Provider store={store}>
           <Root />
-        </ApolloProvider>
+        </Provider>
+        {/* </ApolloProvider> */}
       </SnackbarProvider>
     </ThemeProvider>
   </React.StrictMode>,
