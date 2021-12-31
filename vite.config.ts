@@ -9,21 +9,19 @@ const path = require('path');
 export default defineConfig({
   resolve: {
     alias: {
-      '@utils': path.resolve(__dirname, './src/utils'),
       '@utils/*': path.resolve(__dirname, './src/utils/*'),
-      '@components': path.resolve(__dirname, './src/components'),
       '@components/*': path.resolve(__dirname, './src/components/*'),
-      '@containers': path.resolve(__dirname, './src/containers'),
       '@containers/*': path.resolve(__dirname, './src/containers/*'),
       '@hooks': path.resolve(__dirname, './src/hooks'),
       '@hooks/*': path.resolve(__dirname, './src/hooks/*'),
-      '@layouts': path.resolve(__dirname, './src/layouts'),
       '@layouts/*': path.resolve(__dirname, './src/layouts/*'),
-      '@theme': path.resolve(__dirname, './src/theme'),
       '@theme/*': path.resolve(__dirname, './src/theme/*'),
       '@slices': path.resolve(__dirname, './src/slices'),
       '@slices/*': path.resolve(__dirname, './src/slices/*'),
-    }
+      '@types/*': path.resolve(__dirname, './src/types/*'),
+      '@services/*': path.resolve(__dirname, './src/services/*'),
+      '@services': path.resolve(__dirname, './src/services')
+    },
   },
   plugins: [react()],
 });

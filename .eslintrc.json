@@ -23,29 +23,28 @@
 	],
 	"settings": {
 		"import/resolver": {
-			"typescript": {},
-			"alias": {
-        "map": [
-					[ "@utils", "./src/utils" ],
-					[ "@utils/*", "./src/utils/*" ],
-					[ "@components", "./src/components" ],
-					[ "@components/*", "./src/components/*" ],
-					[ "@containers", "./src/containers" ],
-					[ "@containers/*", "./src/containers/*" ],
-					[ "@hooks", "./src/hooks" ],
-					[ "@hooks/*", "./src/hooks/*" ],
-					[ "@layouts", "./src/layouts" ],
-					[ "@layouts/*", "./src/layouts/*" ],
-					[ "@theme", "./src/theme" ],
-					[ "@theme/*", "./src/theme/*" ],
-					[ "@slices", "./src/slices" ],
-					[ "@slices/*", "./src/slices/*" ],
-        ],
-        "extensions": [".ts", ".js", ".jsx", ".json"]
-      }
+			"typescript": {
+				"alias": {
+					"map": [
+						[ "@utils/*", "./src/utils/*" ],
+						[ "@components/*", "./src/components/*" ],
+						[ "@containers/*", "./src/containers/*" ],
+						[ "@hooks/*", "./src/hooks/*" ],	
+						[ "@layouts/*", "./src/layouts/*" ],
+						[ "@theme/*", "./src/theme/*" ],
+						[ "@slices/*", "./src/slices/*" ],
+						[ "@types/*", "./src/types/*" ],
+						[ "@services/*", "./src/services/*" ]
+					]
+				},
+				"extensions": [".ts", ".js", ".jsx", ".json", ".tsx"]
+			}
 		}
 	},
 	"rules": {
+		"no-await-in-loop": "off",
+		"react/jsx-one-expression-per-line": "off",
+		"no-nested-ternary": "off",
 		"no-use-before-define": "off",
 		"@typescript-eslint/no-use-before-define": ["off"],
 		"react/jsx-filename-extension": [ "warn", {"extensions": [".tsx"]} ],
@@ -80,15 +79,5 @@
 		"jsx-a11y/no-static-element-interactions": "off",
 		"react/jsx-props-no-spreading": "off",
 		"no-param-reassign": "off"
-	},
-	"overrides": [
-    {
-      "files": ["*.graphql"],
-      "parser": "@graphql-eslint/eslint-plugin",
-      "plugins": ["@graphql-eslint"],
-      "rules": {
-        "@graphql-eslint/known-type-names": "error"
-      }
-    }
-  ]
+	}
 }

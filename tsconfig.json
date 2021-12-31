@@ -24,6 +24,8 @@
       "@layouts/*": ["layouts/*"],
       "@theme/*": ["theme/*"],
       "@slices/*": ["slices/*"],
+      "@types/*": ["types/*"],
+      "@services/*": ["services/*"],
     }
   },
   "include": ["./src"],

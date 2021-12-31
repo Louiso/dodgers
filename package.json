@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint -r *.js, *.ts, *.tsx"
   },
   "dependencies": {
     "@apollo/client": "^3.5.6",
@@ -20,11 +21,13 @@
     "graphql.macro": "^1.4.2",
     "history": "5",
     "immer": "^9.0.7",
+    "normalizr": "^3.6.1",
     "notistack": "^2.0.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
     "react-router-dom": "6",
+    "swr": "^1.1.2",
     "use-debounce": "^7.0.1"
   },
   "devDependencies": {
@@ -32,7 +35,7 @@
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
     "@typescript-eslint/eslint-plugin": "^5.7.0",
-    "@typescript-eslint/parser": "^5.7.0",
+    "@typescript-eslint/parser": "^5.8.1",
     "@vitejs/plugin-react": "^1.0.7",
     "babel-plugin-graphql-tag": "^3.3.0",
     "babel-plugin-import-graphql": "^2.8.1",
