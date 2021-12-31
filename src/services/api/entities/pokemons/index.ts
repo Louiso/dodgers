@@ -1,6 +1,6 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-import { pokemonAPI } from '@services/extensions/pokemonAPI';
-import { Pokemon } from '@services/types';
+import { Pokemon } from '../../extensions/types';
+import { pokemonAPI } from '../../extensions/pokemonAPI';
 
 const pokemonAdapter = createEntityAdapter<Pokemon>({
   selectId: (pokemon) => pokemon.id,

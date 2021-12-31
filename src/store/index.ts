@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { pokemonAPI } from '@services/extensions/pokemonAPI';
+import { pokemonAPI } from '@services/api/extensions/pokemonAPI';
 import counterSlice from '@slices/counter/counterSlice';
 
 export const store = configureStore({

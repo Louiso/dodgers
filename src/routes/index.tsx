@@ -6,15 +6,18 @@ import {
 
 import HomePage from '../pages/_home';
 
-const Root = () => (
-  <BrowserRouter>
-    <Routes>
-      <Route
-        path="/home"
-        element={<HomePage />}
-      />
-    </Routes>
-  </BrowserRouter>
-);
+const Root = () => {
+  console.log('adawdawdwa');
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/home"
+          element={<HomePage />}
+        />
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
 export default Root;
