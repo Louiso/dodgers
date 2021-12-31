@@ -2,12 +2,12 @@ import {
   BrowserRouter,
   Routes,
   Route,
-} from 'react-router-dom';
+} from 'react-router-dom'
 
-import HomePage from '../pages/_home';
+import HomePage from '../pages/_home'
 
 const Root = () => {
-  console.log('adawdawdwa');
+  console.log('adawdawdwa')
   return (
     <BrowserRouter>
       <Routes>
@@ -17,7 +17,7 @@ const Root = () => {
         />
       </Routes>
     </BrowserRouter>
-  );
-};
+  )
+}
 
-export default Root;
+export default Root

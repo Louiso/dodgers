@@ -1,12 +1,12 @@
 import Axios, {
   AxiosInstance, Method,
-} from 'axios';
-import { GraphQLClient } from 'graphql-request';
+} from 'axios'
+import { GraphQLClient } from 'graphql-request'
 
 const {
   VITE_APP_DEFAULT_API_SERVER_BASE_URL = 'http://localhost:4000/api',
   VITE_APP_DEFAULT_GRAPHQL_SERVER_BASE_URL = 'http://localhost:4000/graphql',
-} = import.meta.env;
+} = import.meta.env
 
 interface ApiFetcher {
   url: string;
@@ -23,13 +23,13 @@ interface GraphqlFetcher<T> {
 const getHeaders = () => ({
   'Content-Type': 'application/json',
   Authorization: `Bearer ${localStorage.getItem('token')}`,
-});
+})
 
 // INSTANCES
 
-const serverApiInstance = Axios.create({ baseURL: VITE_APP_DEFAULT_API_SERVER_BASE_URL });
+const serverApiInstance = Axios.create({ baseURL: VITE_APP_DEFAULT_API_SERVER_BASE_URL })
 
-const clientGraphqlInstance = new GraphQLClient(VITE_APP_DEFAULT_GRAPHQL_SERVER_BASE_URL, { headers: getHeaders() });
+const clientGraphqlInstance = new GraphQLClient(VITE_APP_DEFAULT_GRAPHQL_SERVER_BASE_URL, { headers: getHeaders() })
 
 // FETCHERS
 
@@ -43,11 +43,11 @@ function createApiFetcher<T>(instance: AxiosInstance) {
       ...getHeaders(),
       ...headers,
     },
-  }).then((response) => response.data);
+  }).then((response) => response.data)
 }
 
 export function defaultApiFetcher<T>(args: ApiFetcher) {
-  return createApiFetcher<T>(serverApiInstance)(args);
+  return createApiFetcher<T>(serverApiInstance)(args)
 }
 
 export async function defaultGraphqlFetcher<T, K>({
@@ -60,5 +60,5 @@ export async function defaultGraphqlFetcher<T, K>({
       ...getHeaders(),
       ...headers,
     },
-  );
+  )
 }
