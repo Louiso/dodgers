@@ -42,6 +42,7 @@
 		}
 	},
 	"rules": {
+		"object-curly-newline": ["error", { "minProperties": 2  }],
 		"no-await-in-loop": "off",
 		"react/jsx-one-expression-per-line": "off",
 		"no-nested-ternary": "off",

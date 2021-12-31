@@ -1,7 +1,4 @@
-import {
-  // TextField,
-  Theme,
-} from '@mui/material';
+import { Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
 const HomePage = () => {
@@ -15,10 +12,6 @@ const HomePage = () => {
   );
 };
 
-const useStyles = makeStyles<Theme>((/* theme */) => ({
-  root: {
-
-  },
-}), { name: 'HomePage' });
+const useStyles = makeStyles<Theme>((/* theme */) => ({ root: {} }), { name: 'HomePage' });
 
 export default HomePage;
